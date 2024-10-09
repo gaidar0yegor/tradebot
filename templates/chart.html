@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>График торгового бота</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>График торгового бота для {{ trade_symbol }}</h1>
+    <canvas id="botChart" width="400" height="200"></canvas>
+
+    <script>
+        var ctx = document.getElementById('botChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [], // Метки времени
+                datasets: [
+                    {
+                        label: 'Цена',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        data: [] // Данные цены
+                    },
+                    {
+                        label: 'RSI',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        data: [] // Данные RSI
+                    }
+                ]
+            },
+            options: {}
+        });
+
+        // Подключение к WebSocket
+        var socket = io();
+
+        // Обработка входящих данных от бота
+        socket.on('bot_data', function(data) {
+            var timeNow = new Date().toLocaleTimeString();  // Получаем текущее время
+
+            // Добавляем новые данные в график
+            chart.data.labels.push(timeNow);  // Добавляем метку времени
+            chart.data.datasets[0].data.push(data.price);  // Добавляем цену
+            chart.data.datasets[1].data.push(data.rsi);  // Добавляем RSI
+
+            chart.update();  // Обновляем график
+        });
+    </script>
+</body>
+</html>

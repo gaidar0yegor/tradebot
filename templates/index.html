@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запуск торгового бота</title>
+</head>
+<body>
+    <h1>Запуск торгового бота</h1>
+    <form action="/start_bot" method="POST">
+        <label for="rsi_period">Период RSI:</label>
+        <input type="text" id="rsi_period" name="rsi_period" required><br><br>
+
+        <label for="trade_symbol">Торговый символ:</label>
+        <input type="text" id="trade_symbol" name="trade_symbol" value="ETHUSDT" required><br><br>
+
+        <label for="trade_quantity">Количество сделки:</label>
+        <input type="text" id="trade_quantity" name="trade_quantity" required><br><br>
+
+        <label for="budget">Бюджет:</label>
+        <input type="text" id="budget" name="budget" required><br><br>
+
+        <label for="stop_loss">Процент Stop Loss:</label>
+        <input type="text" id="stop_loss" name="stop_loss" required><br><br>
+
+        <label for="ma1">MA1 (Скользящая средняя 1):</label>
+        <input type="text" id="ma1" name="ma1" required><br><br>
+
+        <label for="ma2">MA2 (Скользящая средняя 2):</label>
+        <input type="text" id="ma2" name="ma2" required><br><br>
+
+        <label for="ma3">MA3 (Скользящая средняя 3):</label>
+        <input type="text" id="ma3" name="ma3" required><br><br>
+
+        <input type="submit" value="Запустить бота">
+    </form>
+</body>
+</html>
